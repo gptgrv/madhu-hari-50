@@ -21,7 +21,7 @@ export default function TravelMap() {
         {/* Stats bar */}
         <div className="flex justify-center gap-8 mb-12">
           <div className="text-center">
-            <p className="font-[family-name:var(--font-serif)] text-4xl font-bold text-gold-dark">14</p>
+            <p className="font-[family-name:var(--font-serif)] text-4xl font-bold text-gold-dark">16</p>
             <p className="text-text-muted text-sm">Destinations</p>
           </div>
           <div className="w-[1px] bg-gold-light/40" />

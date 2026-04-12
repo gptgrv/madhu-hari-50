@@ -48,8 +48,12 @@ export default function Timeline() {
                 {/* Content card */}
                 <div className={`flex-1 ${i % 2 === 0 ? "md:text-right md:pr-12" : "md:text-left md:pl-12"}`}>
                   <div className="bg-white rounded-2xl p-6 shadow-sm border border-gold-light/20 hover:shadow-md hover:border-gold-light/40 transition-all duration-300">
-                    <span className="text-3xl mb-2 block">{event.icon}</span>
-                    <span className="text-gold-dark font-bold text-sm tracking-wider uppercase">
+                    {event.photo ? (
+                      <img src={event.photo} alt={event.title} className="w-full h-32 object-cover object-top rounded-xl mb-3" />
+                    ) : (
+                      <span className="text-3xl mb-2 block">{event.icon}</span>
+                    )}
+                    <span className="text-gold-dark font-bold text-base tracking-wider uppercase">
                       {event.year}
                     </span>
                     <h3 className="font-[family-name:var(--font-serif)] text-xl font-semibold text-text-dark mt-1">
@@ -58,7 +62,7 @@ export default function Timeline() {
                     {event.titleHi && (
                       <p className="text-gold-dark/70 text-sm italic">{event.titleHi}</p>
                     )}
-                    <p className="text-text-muted mt-2 text-sm leading-relaxed">
+                    <p className="text-text-muted mt-2 text-base leading-relaxed">
                       {event.description}
                     </p>
                   </div>

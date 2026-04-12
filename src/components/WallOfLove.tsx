@@ -1,12 +1,12 @@
 "use client";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 
 interface WishMessage {
   id: string;
   name: string;
-  relation: string;
   message: string;
-  photo?: string;
+  mediaUrl?: string;
+  mediaType?: string;
   timestamp: number;
   approved: boolean;
 }
@@ -16,7 +16,10 @@ export default function WallOfLove() {
   const [showForm, setShowForm] = useState(false);
   const [submitting, setSubmitting] = useState(false);
   const [submitted, setSubmitted] = useState(false);
-  const [form, setForm] = useState({ name: "", relation: "", message: "", photo: "" });
+  const [form, setForm] = useState({ name: "", message: "" });
+  const [file, setFile] = useState<File | null>(null);
+  const [filePreview, setFilePreview] = useState<string | null>(null);
+  const fileRef = useRef<HTMLInputElement>(null);
 
   useEffect(() => {
     fetchWishes();
@@ -30,7 +33,23 @@ export default function WallOfLove() {
         setWishes(data.wishes || []);
       }
     } catch {
-      // Silent fail — wall just shows empty
+      // Silent fail
+    }
+  }
+
+  function handleFileChange(e: React.ChangeEvent<HTMLInputElement>) {
+    const f = e.target.files?.[0];
+    if (!f) return;
+    // 10MB limit
+    if (f.size > 10 * 1024 * 1024) {
+      alert("File too large. Max 10MB.");
+      return;
+    }
+    setFile(f);
+    if (f.type.startsWith("image/")) {
+      setFilePreview(URL.createObjectURL(f));
+    } else if (f.type.startsWith("video/")) {
+      setFilePreview("video");
     }
   }
 
@@ -38,14 +57,20 @@ export default function WallOfLove() {
     e.preventDefault();
     setSubmitting(true);
     try {
+      const formData = new FormData();
+      formData.append("name", form.name);
+      formData.append("message", form.message);
+      if (file) formData.append("media", file);
+
       const res = await fetch("/api/wishes", {
         method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(form),
+        body: formData,
       });
       if (res.ok) {
         setSubmitted(true);
-        setForm({ name: "", relation: "", message: "", photo: "" });
+        setForm({ name: "", message: "" });
+        setFile(null);
+        setFilePreview(null);
       }
     } catch {
       alert("Something went wrong. Please try again.");
@@ -104,21 +129,6 @@ export default function WallOfLove() {
                     value={form.name}
                     onChange={(e) => setForm({ ...form, name: e.target.value })}
                     className="w-full px-4 py-3 rounded-xl border border-gold-light/40 focus:border-gold focus:ring-1 focus:ring-gold outline-none transition bg-cream/50"
-                    placeholder="e.g., Sharma Ji"
-                  />
-                </div>
-
-                <div>
-                  <label className="block text-sm font-medium text-text-dark mb-1">
-                    Relation / रिश्ता
-                  </label>
-                  <input
-                    type="text"
-                    required
-                    value={form.relation}
-                    onChange={(e) => setForm({ ...form, relation: e.target.value })}
-                    className="w-full px-4 py-3 rounded-xl border border-gold-light/40 focus:border-gold focus:ring-1 focus:ring-gold outline-none transition bg-cream/50"
-                    placeholder="e.g., Family Friend, Neighbour, Colleague"
                   />
                 </div>
 
@@ -134,6 +144,47 @@ export default function WallOfLove() {
                     className="w-full px-4 py-3 rounded-xl border border-gold-light/40 focus:border-gold focus:ring-1 focus:ring-gold outline-none transition bg-cream/50 resize-none"
                     placeholder="Share a memory, wish, or message for Dr Hari & Madhu ji..."
                   />
+                </div>
+
+                {/* File upload */}
+                <div>
+                  <label className="block text-sm font-medium text-text-dark mb-1">
+                    Add a Photo or Video / फ़ोटो या वीडियो (optional)
+                  </label>
+                  <input
+                    ref={fileRef}
+                    type="file"
+                    accept="image/*,video/*"
+                    onChange={handleFileChange}
+                    className="hidden"
+                  />
+                  <button
+                    type="button"
+                    onClick={() => fileRef.current?.click()}
+                    className="w-full px-4 py-3 rounded-xl border-2 border-dashed border-gold-light/40 hover:border-gold transition bg-cream/30 text-text-muted text-sm"
+                  >
+                    {file ? `✅ ${file.name}` : "📷 Tap to upload photo or video"}
+                  </button>
+                  {filePreview && filePreview !== "video" && (
+                    <div className="mt-3 relative">
+                      <img src={filePreview} alt="Preview" className="w-full max-h-48 object-cover rounded-xl" />
+                      <button
+                        type="button"
+                        onClick={() => { setFile(null); setFilePreview(null); }}
+                        className="absolute top-2 right-2 bg-black/60 text-white w-6 h-6 rounded-full text-xs"
+                      >✕</button>
+                    </div>
+                  )}
+                  {filePreview === "video" && (
+                    <div className="mt-3 flex items-center gap-2 text-sm text-text-muted">
+                      <span>🎬</span> <span>{file?.name}</span>
+                      <button
+                        type="button"
+                        onClick={() => { setFile(null); setFilePreview(null); }}
+                        className="text-red-500 ml-auto"
+                      >Remove</button>
+                    </div>
+                  )}
                 </div>
 
                 <button
@@ -156,6 +207,12 @@ export default function WallOfLove() {
                 key={wish.id}
                 className="break-inside-avoid bg-white rounded-2xl p-6 shadow-sm border border-gold-light/20 hover:shadow-md hover:border-gold-light/40 transition-all duration-300"
               >
+                {wish.mediaUrl && wish.mediaType?.startsWith("image") && (
+                  <img src={wish.mediaUrl} alt="" className="w-full rounded-xl mb-4 object-cover max-h-64" />
+                )}
+                {wish.mediaUrl && wish.mediaType?.startsWith("video") && (
+                  <video src={wish.mediaUrl} controls className="w-full rounded-xl mb-4 max-h-64" />
+                )}
                 <p className="text-text-dark leading-relaxed mb-4 italic">
                   &ldquo;{wish.message}&rdquo;
                 </p>
@@ -163,10 +220,7 @@ export default function WallOfLove() {
                   <div className="w-8 h-8 rounded-full bg-gradient-to-br from-gold to-gold-dark flex items-center justify-center text-white text-sm font-bold">
                     {wish.name[0]}
                   </div>
-                  <div>
-                    <p className="text-sm font-semibold text-text-dark">{wish.name}</p>
-                    <p className="text-xs text-text-muted">{wish.relation}</p>
-                  </div>
+                  <p className="text-sm font-semibold text-text-dark">{wish.name}</p>
                 </div>
               </div>
             ))}

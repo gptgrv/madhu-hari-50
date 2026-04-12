@@ -21,5 +21,7 @@ export const travels: TravelDestination[] = [
   { name: "Nepal", country: "Nepal", lat: 28.3949, lng: 84.1240, emoji: "🇳🇵" },
   { name: "Dubai", country: "UAE", lat: 25.2048, lng: 55.2708, emoji: "🇦🇪" },
   { name: "Belgium", country: "Belgium", lat: 50.8503, lng: 4.3517, emoji: "🇧🇪" },
+  { name: "Zanzibar", country: "Tanzania", lat: -6.1659, lng: 39.2026, emoji: "🇹🇿" },
+  { name: "Ladakh", country: "India", lat: 34.1526, lng: 77.5771, emoji: "🏔️" },
   { name: "Solan", country: "India (Home)", lat: 30.9045, lng: 77.0967, emoji: "🏠" },
 ];

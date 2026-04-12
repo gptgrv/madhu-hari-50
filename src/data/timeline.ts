@@ -4,9 +4,18 @@ export interface TimelineEvent {
   titleHi?: string;
   description: string;
   icon: string;
+  photo?: string;
 }
 
 export const timelineEvents: TimelineEvent[] = [
+  {
+    year: "~1970s",
+    title: "Dr Hari Gupta — The Young Doctor",
+    titleHi: "युवा डॉक्टर",
+    description: "Before the journey together began — a young, dashing Dr Hari Gupta at medical college. The man who would heal thousands.",
+    icon: "🩺",
+    photo: "/photos/510317981_10228135768611422_6961161557252829862_n.jpg",
+  },
   {
     year: "1976",
     title: "The Beginning",

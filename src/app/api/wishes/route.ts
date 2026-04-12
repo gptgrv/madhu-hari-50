@@ -3,13 +3,14 @@ import { promises as fs } from "fs";
 import path from "path";
 
 const DATA_FILE = path.join(process.cwd(), "data", "wishes.json");
+const UPLOADS_DIR = path.join(process.cwd(), "public", "uploads");
 
 interface Wish {
   id: string;
   name: string;
-  relation: string;
   message: string;
-  photo?: string;
+  mediaUrl?: string;
+  mediaType?: string;
   timestamp: number;
   approved: boolean;
 }
@@ -34,25 +35,42 @@ export async function GET() {
 }
 
 export async function POST(req: NextRequest) {
-  const body = await req.json();
-  const { name, relation, message } = body;
+  const formData = await req.formData();
+  const name = formData.get("name") as string;
+  const message = formData.get("message") as string;
+  const media = formData.get("media") as File | null;
 
-  if (!name || !relation || !message) {
+  if (!name || !message) {
     return NextResponse.json({ error: "Missing fields" }, { status: 400 });
+  }
+
+  const id = Date.now().toString(36) + Math.random().toString(36).slice(2, 6);
+  let mediaUrl: string | undefined;
+  let mediaType: string | undefined;
+
+  if (media && media.size > 0) {
+    await fs.mkdir(UPLOADS_DIR, { recursive: true });
+    const ext = media.name.split(".").pop() || "bin";
+    const filename = `${id}.${ext}`;
+    const buffer = Buffer.from(await media.arrayBuffer());
+    await fs.writeFile(path.join(UPLOADS_DIR, filename), buffer);
+    mediaUrl = `/uploads/${filename}`;
+    mediaType = media.type;
   }
 
   const wishes = await readWishes();
   const newWish: Wish = {
-    id: Date.now().toString(36) + Math.random().toString(36).slice(2, 6),
+    id,
     name: name.trim(),
-    relation: relation.trim(),
     message: message.trim(),
+    mediaUrl,
+    mediaType,
     timestamp: Date.now(),
-    approved: false, // Requires manual approval
+    approved: false,
   };
 
   wishes.push(newWish);
   await writeWishes(wishes);
 
-  return NextResponse.json({ success: true, id: newWish.id });
+  return NextResponse.json({ success: true, id });
 }
