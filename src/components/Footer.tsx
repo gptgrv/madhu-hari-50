@@ -6,7 +6,7 @@ export default function Footer() {
         <div className="max-w-3xl mx-auto text-center">
           <img
             src="/photos/footer-together.jpg"
-            alt="Dr Hari & Madhu Gupta"
+            alt="Madhu & Dr Hari Gupta"
             className="w-40 h-40 md:w-52 md:h-52 object-cover rounded-full mx-auto mb-8 border-4 border-gold/40 shadow-lg shadow-gold/20"
           />
           <p className="font-[family-name:var(--font-serif)] text-3xl md:text-4xl text-gold-light font-semibold mb-3">

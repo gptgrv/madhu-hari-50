@@ -99,11 +99,11 @@ export default function Hero() {
         <div className="w-24 h-[2px] bg-gradient-to-r from-transparent via-gold to-transparent mx-auto my-8" />
 
         <h2 className="font-[family-name:var(--font-serif)] text-3xl md:text-5xl text-white font-semibold mb-2">
-          Dr Hari Gupta
+          Madhu Gupta
         </h2>
         <p className="text-gold-light text-2xl md:text-3xl font-[family-name:var(--font-serif)] italic mb-2">&</p>
         <h2 className="font-[family-name:var(--font-serif)] text-3xl md:text-5xl text-white font-semibold mb-8">
-          Madhu Gupta
+          Dr Hari Gupta
         </h2>
 
         <p className="text-cream/80 text-lg md:text-xl tracking-wide">
