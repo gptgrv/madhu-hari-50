@@ -2,12 +2,12 @@
 import { useState, useEffect, useRef } from "react";
 
 const heroPhotos = [
-  { src: "/photos/hero-1-2026.JPG", alt: "Sushi restaurant, Japan", pos: "40% center" },
-  { src: "/photos/Seoul-palace-both-night.jpeg", alt: "Seoul Palace at night", pos: "center" },
-  { src: "/photos/hero-3.jpeg", alt: "Young Hari & Madhu — the early years", pos: "center" },
-  { src: "/photos/510748313_9997095600374570_9068290014702434216_n.jpg", alt: "Ladakh", pos: "center" },
-  { src: "/photos/WhatsApp Image 2026-04-12 at 14.23.13 (3).jpeg", alt: "Paris, Eiffel Tower", pos: "center" },
-  { src: "/photos/494203148_10227467962756693_8896643948193738416_n.jpg", alt: "Universal Studios, Singapore", pos: "30% center" },
+  { src: "/photos/hero-1.JPG", alt: "Sushi restaurant, Japan", pos: "40% center" },
+  { src: "/photos/hero-2.jpg", alt: "Seoul Palace at night", pos: "center" },
+  { src: "/photos/hero-3.jpg", alt: "Young Hari & Madhu — the early years", pos: "center" },
+  { src: "/photos/hero-4.JPG", alt: "Ladakh", pos: "center" },
+  { src: "/photos/hero-5.jpg", alt: "Paris, Eiffel Tower", pos: "center" },
+  { src: "/photos/hero-6.jpg", alt: "Universal Studios, Singapore", pos: "30% center" },
 ];
 
 export default function Hero() {

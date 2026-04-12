@@ -9,10 +9,6 @@ interface Photo {
 
 const galleryPhotos: Photo[] = [
   { src: "/photos/505919763_9936683243082473_7783100801688979198_n.jpg", caption: "Young family — where it all began 🖤" },
-  { src: "/photos/WhatsApp Image 2026-04-12 at 14.23.13 (3).jpeg", caption: "Atop the Eiffel Tower, Paris" },
-  { src: "/photos/510748313_9997095600374570_9068290014702434216_n.jpg", caption: "Nubra Valley, Ladakh" },
-  { src: "/photos/Seoul-palace-both-night.jpeg", caption: "Gyeongbokgung Palace by night, Seoul" },
-  { src: "/photos/494203148_10227467962756693_8896643948193738416_n.jpg", caption: "Universal Studios, Singapore" },
   { src: "/photos/517285402_10228630084569012_5073919397648566496_n.jpg", caption: "Backwater cruise — hats on!" },
   { src: "/photos/517395314_10228586922769994_5501380678310409519_n.jpg", caption: "Karibu Zanzibar! 🌊" },
   { src: "/photos/Taipei-hotel-both.jpeg", caption: "Grand National Theatre, Taipei" },
