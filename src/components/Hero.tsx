@@ -2,7 +2,7 @@
 import { useState, useEffect, useRef } from "react";
 
 const heroPhotos = [
-  { src: "/photos/hero-1.JPG", alt: "Sushi restaurant, Japan", pos: "40% center" },
+  { src: "/photos/hero-1-2026.JPG", alt: "Sushi restaurant, Japan", pos: "40% center" },
   { src: "/photos/Seoul-palace-both-night.jpeg", alt: "Seoul Palace at night", pos: "center" },
   { src: "/photos/hero-3.jpeg", alt: "Young Hari & Madhu — the early years", pos: "center" },
   { src: "/photos/510748313_9997095600374570_9068290014702434216_n.jpg", alt: "Ladakh", pos: "center" },
