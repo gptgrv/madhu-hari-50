@@ -108,9 +108,12 @@ export default function Hero() {
         </h2>
 
         <p className="text-cream/80 text-lg md:text-xl tracking-wide">
-          14th April 1976 — 14th April 2026
+          14th April 2026
         </p>
-        <p className="text-gold-light/70 text-base mt-2 italic">
+        <p className="text-gold-light text-lg md:text-xl mt-2 font-[family-name:var(--font-serif)] italic">
+          And the celebration continues...
+        </p>
+        <p className="text-gold-light/70 text-base mt-3 italic">
           &ldquo;एक प्यार का नगमा है, मौजों की रवानी है...&rdquo;
         </p>
 
