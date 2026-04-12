@@ -1,7 +1,13 @@
 "use client";
 import { useState } from "react";
 
-const galleryPhotos = [
+interface Photo {
+  src: string;
+  caption: string;
+  rotate?: boolean;
+}
+
+const galleryPhotos: Photo[] = [
   { src: "/photos/505919763_9936683243082473_7783100801688979198_n.jpg", caption: "Young family — where it all began 🖤" },
   { src: "/photos/WhatsApp Image 2026-04-12 at 14.23.13 (3).jpeg", caption: "Atop the Eiffel Tower, Paris" },
   { src: "/photos/510748313_9997095600374570_9068290014702434216_n.jpg", caption: "Nubra Valley, Ladakh" },

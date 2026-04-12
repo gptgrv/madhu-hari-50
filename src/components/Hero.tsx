@@ -50,8 +50,9 @@ export default function Hero() {
         {heroPhotos.map((_, i) => (
           <button
             key={i}
-            onClick={() => { setFading(true); setTimeout(() => { setCurrent(i); setFading(false); }, 400); }}
+            onClick={() => setCurrent(i)}
             className={`rounded-full transition-all duration-300 ${i === current ? "w-6 h-2 bg-gold" : "w-2 h-2 bg-white/40"}`}
+            aria-label={`Go to photo ${i + 1}`}
           />
         ))}
       </div>
