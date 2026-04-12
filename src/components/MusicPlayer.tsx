@@ -19,6 +19,7 @@ export default function MusicPlayer() {
     audio.volume = 0.3;
 
     const autoplay = () => {
+      audio.currentTime = 49;
       audio.play().then(() => setPlaying(true)).catch(() => {});
       window.removeEventListener("click", autoplay);
       window.removeEventListener("scroll", autoplay);
