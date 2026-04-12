@@ -1,76 +1,96 @@
+import { randomUUID } from "crypto";
 import { NextRequest, NextResponse } from "next/server";
-import { promises as fs } from "fs";
-import path from "path";
+import { getSupabaseAdmin, WALL_OF_LOVE_BUCKET } from "@/lib/supabase-admin";
+import { formatWish, isAdminAuthorized } from "@/lib/wishes";
 
-const DATA_FILE = path.join(process.cwd(), "data", "wishes.json");
-const UPLOADS_DIR = path.join(process.cwd(), "public", "uploads");
+export async function GET(req: NextRequest) {
+  const supabaseAdmin = getSupabaseAdmin();
+  const password = req.headers.get("x-admin-password");
+  const isAdmin = password ? isAdminAuthorized(password) : false;
 
-interface Wish {
-  id: string;
-  name: string;
-  message: string;
-  mediaUrl?: string;
-  mediaType?: string;
-  timestamp: number;
-  approved: boolean;
-}
+  let query = supabaseAdmin.from("wishes").select("*").order("timestamp", {
+    ascending: false,
+  });
 
-async function readWishes(): Promise<Wish[]> {
-  try {
-    const data = await fs.readFile(DATA_FILE, "utf-8");
-    return JSON.parse(data);
-  } catch {
-    return [];
+  if (!isAdmin) {
+    query = query.eq("approved", true);
   }
-}
 
-async function writeWishes(wishes: Wish[]) {
-  await fs.mkdir(path.dirname(DATA_FILE), { recursive: true });
-  await fs.writeFile(DATA_FILE, JSON.stringify(wishes, null, 2));
-}
+  const { data, error } = await query;
 
-export async function GET() {
-  const wishes = await readWishes();
-  return NextResponse.json({ wishes });
+  if (error) {
+    return NextResponse.json({ error: error.message }, { status: 500 });
+  }
+
+  return NextResponse.json({ wishes: (data ?? []).map(formatWish) });
 }
 
 export async function POST(req: NextRequest) {
+  const supabaseAdmin = getSupabaseAdmin();
   const formData = await req.formData();
-  const name = formData.get("name") as string;
-  const message = formData.get("message") as string;
-  const media = formData.get("media") as File | null;
+  const name = formData.get("name");
+  const message = formData.get("message");
+  const media = formData.get("media");
 
-  if (!name || !message) {
+  if (typeof name !== "string" || typeof message !== "string") {
     return NextResponse.json({ error: "Missing fields" }, { status: 400 });
   }
 
-  const id = Date.now().toString(36) + Math.random().toString(36).slice(2, 6);
-  let mediaUrl: string | undefined;
-  let mediaType: string | undefined;
+  const trimmedName = name.trim();
+  const trimmedMessage = message.trim();
 
-  if (media && media.size > 0) {
-    await fs.mkdir(UPLOADS_DIR, { recursive: true });
-    const ext = media.name.split(".").pop() || "bin";
-    const filename = `${id}.${ext}`;
-    const buffer = Buffer.from(await media.arrayBuffer());
-    await fs.writeFile(path.join(UPLOADS_DIR, filename), buffer);
-    mediaUrl = `/uploads/${filename}`;
-    mediaType = media.type;
+  if (!trimmedName || !trimmedMessage) {
+    return NextResponse.json({ error: "Missing fields" }, { status: 400 });
   }
 
-  const wishes = await readWishes();
-  const newWish: Wish = {
-    id,
-    name: name.trim(),
-    message: message.trim(),
-    mediaUrl,
-    mediaType,
-    timestamp: Date.now(),
-    approved: false,
-  };
+  const id = randomUUID();
+  let mediaUrl: string | null = null;
+  let mediaPath: string | null = null;
+  let mediaType: string | null = null;
 
-  wishes.push(newWish);
-  await writeWishes(wishes);
+  if (media instanceof File && media.size > 0) {
+    const ext = media.name.includes(".") ? media.name.split(".").pop() : "";
+    const safeExt = ext ? `.${ext.toLowerCase()}` : "";
+    mediaPath = `${id}/${Date.now()}${safeExt}`;
+    mediaType = media.type || null;
 
-  return NextResponse.json({ success: true, id });
+    const { error: uploadError } = await supabaseAdmin.storage
+      .from(WALL_OF_LOVE_BUCKET)
+      .upload(mediaPath, media, {
+        contentType: media.type || undefined,
+        upsert: false,
+      });
+
+    if (uploadError) {
+      return NextResponse.json({ error: uploadError.message }, { status: 500 });
+    }
+
+    const { data: publicUrlData } = supabaseAdmin.storage
+      .from(WALL_OF_LOVE_BUCKET)
+      .getPublicUrl(mediaPath);
+
+    mediaUrl = publicUrlData.publicUrl;
+  }
+
+  const timestamp = new Date().toISOString();
+  const { data, error } = await supabaseAdmin
+    .from("wishes")
+    .insert({
+      id,
+      name: trimmedName,
+      message: trimmedMessage,
+      media_url: mediaUrl,
+      media_path: mediaPath,
+      media_type: mediaType,
+      timestamp,
+      approved: true,
+    })
+    .select("*")
+    .single();
+
+  if (error) {
+    return NextResponse.json({ error: error.message }, { status: 500 });
+  }
+
+  return NextResponse.json({ success: true, wish: formatWish(data) }, { status: 201 });
 }

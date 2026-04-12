@@ -1,18 +1,9 @@
 "use client";
 import { useState, useEffect, useRef } from "react";
-
-interface WishMessage {
-  id: string;
-  name: string;
-  message: string;
-  mediaUrl?: string;
-  mediaType?: string;
-  timestamp: number;
-  approved: boolean;
-}
+import type { Wish } from "@/lib/wishes";
 
 export default function WallOfLove() {
-  const [wishes, setWishes] = useState<WishMessage[]>([]);
+  const [wishes, setWishes] = useState<Wish[]>([]);
   const [showForm, setShowForm] = useState(false);
   const [submitting, setSubmitting] = useState(false);
   const [submitted, setSubmitted] = useState(false);
@@ -20,11 +11,7 @@ export default function WallOfLove() {
   const [file, setFile] = useState<File | null>(null);
   const [filePreview, setFilePreview] = useState<string | null>(null);
   const fileRef = useRef<HTMLInputElement>(null);
-
-  useEffect(() => {
-    fetchWishes();
-  }, []);
-
+  
   async function fetchWishes() {
     try {
       const res = await fetch("/api/wishes");
@@ -36,6 +23,28 @@ export default function WallOfLove() {
       // Silent fail
     }
   }
+
+  useEffect(() => {
+    let cancelled = false;
+
+    void (async () => {
+      try {
+        const res = await fetch("/api/wishes");
+        if (!res.ok) return;
+
+        const data = await res.json();
+        if (!cancelled) {
+          setWishes(data.wishes || []);
+        }
+      } catch {
+        // Silent fail
+      }
+    })();
+
+    return () => {
+      cancelled = true;
+    };
+  }, []);
 
   function handleFileChange(e: React.ChangeEvent<HTMLInputElement>) {
     const f = e.target.files?.[0];
@@ -67,6 +76,7 @@ export default function WallOfLove() {
         body: formData,
       });
       if (res.ok) {
+        await fetchWishes();
         setSubmitted(true);
         setForm({ name: "", message: "" });
         setFile(null);
@@ -114,7 +124,7 @@ export default function WallOfLove() {
                   Thank You!
                 </h3>
                 <p className="text-text-muted">
-                  Your message has been received. It will appear on the wall once reviewed. 🙏
+                  Your message is now live on the wall. Thank you for sharing your love. 🙏
                 </p>
               </div>
             ) : (
