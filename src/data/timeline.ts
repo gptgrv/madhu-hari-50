@@ -73,13 +73,6 @@ export const timelineEvents: TimelineEvent[] = [
     icon: "🏠",
   },
   {
-    year: "2010s",
-    title: "The Travel Bug Bites",
-    titleHi: "सफ़र शुरू",
-    description: "With the kids grown up, the adventures began — Europe, Asia, and beyond. A new country every year!",
-    icon: "✈️",
-  },
-  {
     year: "2006 onwards",
     title: "Grandparents!",
     titleHi: "नाना-नानी बने!",
@@ -92,6 +85,13 @@ export const timelineEvents: TimelineEvent[] = [
     titleHi: "रिटायरमेंट",
     description: "After decades of healing others, Dr. Hari Gupta retired from service. But the real adventures were just beginning.",
     icon: "🎉",
+  },
+  {
+    year: "2010s",
+    title: "The Travel Bug Bites",
+    titleHi: "सफ़र शुरू",
+    description: "With the kids grown up, the adventures began — Europe, Asia, and beyond. A new country every year!",
+    icon: "✈️",
   },
   {
     year: "2026",

@@ -46,6 +46,21 @@ export default function WallOfLove() {
     };
   }, []);
 
+  useEffect(() => {
+    const params = new URLSearchParams(window.location.search);
+    const shouldOpen = params.get("wall") === "open" || params.get("open") === "1";
+
+    if (shouldOpen) {
+      setShowForm(true);
+      setSubmitted(false);
+
+      window.requestAnimationFrame(() => {
+        const section = document.getElementById("wall-of-love");
+        section?.scrollIntoView({ behavior: "smooth", block: "start" });
+      });
+    }
+  }, []);
+
   function handleFileChange(e: React.ChangeEvent<HTMLInputElement>) {
     const f = e.target.files?.[0];
     if (!f) return;
