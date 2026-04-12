@@ -57,7 +57,7 @@ export default function Gallery() {
                   style={photo.rotate ? { transform: "rotate(90deg) scale(1.4)", transformOrigin: "center" } : {}}
                   loading="lazy"
                 />
-                <div className="absolute inset-0 bg-gradient-to-t from-black/40 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end p-4">
+                <div className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-black/60 via-black/30 to-transparent pt-10 pb-3 px-4">
                   <p className="text-white text-sm font-medium">{photo.caption}</p>
                 </div>
               </div>
