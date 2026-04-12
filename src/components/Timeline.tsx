@@ -43,7 +43,7 @@ export default function Timeline() {
                 className={`timeline-item relative flex flex-col md:flex-row items-start md:items-center gap-4 ${
                   i % 2 === 0 ? "md:flex-row" : "md:flex-row-reverse"
                 }`}
-                style={{ animationDelay: `${i * 0.15}s` }}
+                style={{ animationDelay: `${i * 0.05}s` }}
               >
                 {/* Content card */}
                 <div className={`flex-1 ${i % 2 === 0 ? "md:text-right md:pr-12" : "md:text-left md:pl-12"}`}>
