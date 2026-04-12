@@ -7,21 +7,22 @@ import WallOfLove from "@/components/WallOfLove";
 import Gallery from "@/components/Gallery";
 import MusicPlayer from "@/components/MusicPlayer";
 import Footer from "@/components/Footer";
+import SectionDivider from "@/components/SectionDivider";
 
 export default function Home() {
   return (
     <main>
       <Navigation />
       <Hero />
-      <div className="section-divider" />
+      <SectionDivider />
       <Timeline />
-      <div className="section-divider" />
+      <SectionDivider />
       <TravelMap />
-      <div className="section-divider" />
+      <SectionDivider />
       <Personalities />
-      <div className="section-divider" />
+      <SectionDivider />
       <WallOfLove />
-      <div className="section-divider" />
+      <SectionDivider />
       <Gallery />
       <Footer />
       <MusicPlayer />

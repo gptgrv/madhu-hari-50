@@ -49,7 +49,7 @@ export default function Gallery() {
               className="break-inside-avoid group cursor-pointer"
               onClick={() => setLightbox(i)}
             >
-              <div className="relative overflow-hidden rounded-2xl shadow-sm hover:shadow-lg transition-all duration-300">
+              <div className="relative overflow-hidden rounded-2xl shadow-sm hover:shadow-lg hover:ring-2 hover:ring-gold/40 transition-all duration-300">
                 <img
                   src={photo.src}
                   alt={photo.caption}
@@ -73,7 +73,7 @@ export default function Gallery() {
       {/* Lightbox */}
       {lightbox !== null && (
         <div
-          className="fixed inset-0 z-[100] bg-black/90 flex items-center justify-center p-4"
+          className="fixed inset-0 z-[100] bg-[#2d1810]/95 backdrop-blur-sm flex items-center justify-center p-4"
           onClick={() => setLightbox(null)}
         >
           <button
@@ -94,7 +94,7 @@ export default function Gallery() {
           <img
             src={galleryPhotos[lightbox].src}
             alt={galleryPhotos[lightbox].caption}
-            className="max-h-[85vh] max-w-[90vw] object-contain rounded-lg"
+            className="max-h-[85vh] max-w-[90vw] object-contain rounded-lg shadow-2xl shadow-gold/10"
             onClick={(e) => e.stopPropagation()}
           />
           <button

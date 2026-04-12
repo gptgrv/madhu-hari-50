@@ -1,5 +1,5 @@
 "use client";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 
 const heroPhotos = [
   { src: "/photos/hero-1.JPG", alt: "Tea garden, South India" },
@@ -12,12 +12,32 @@ const heroPhotos = [
 
 export default function Hero() {
   const [current, setCurrent] = useState(0);
+  const [count, setCount] = useState(0);
+  const countRef = useRef<HTMLSpanElement>(null);
+  const counted = useRef(false);
 
   useEffect(() => {
     const interval = setInterval(() => {
       setCurrent((c) => (c + 1) % heroPhotos.length);
     }, 4000);
     return () => clearInterval(interval);
+  }, []);
+
+  // Animate "50" counter on load
+  useEffect(() => {
+    if (counted.current) return;
+    counted.current = true;
+    let start: number | null = null;
+    const duration = 3500;
+    function animate(ts: number) {
+      if (!start) start = ts;
+      const progress = Math.min((ts - start) / duration, 1);
+      // Ease-out cubic for elegant deceleration
+      const eased = 1 - Math.pow(1 - progress, 3);
+      setCount(Math.round(eased * 50));
+      if (progress < 1) requestAnimationFrame(animate);
+    }
+    requestAnimationFrame(animate);
   }, []);
 
   return (
@@ -68,7 +88,7 @@ export default function Hero() {
         </p>
 
         <h1 className="font-[family-name:var(--font-serif)] text-5xl md:text-7xl lg:text-8xl font-bold text-white mb-4">
-          <span className="gold-shimmer">50</span>
+          <span ref={countRef} className="gold-shimmer">{count}</span>
           <span className="text-cream"> Golden Years</span>
         </h1>
 
