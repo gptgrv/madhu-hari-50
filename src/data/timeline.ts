@@ -22,7 +22,7 @@ export const timelineEvents: TimelineEvent[] = [
     titleHi: "रसायन शास्त्र की विदुषी",
     description: "At HPU, Madhu completed her MPhil in Chemistry, topped the exam, and impressed her professors so deeply that they encouraged her to continue on to a PhD.",
     icon: "🧪",
-    photo: "/photos/madhu_malita.jpeg",
+    photo: "/photos/madhu_college.jpeg",
   },
   {
     year: "1976",
