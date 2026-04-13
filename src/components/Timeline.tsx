@@ -49,7 +49,7 @@ export default function Timeline() {
                 <div className={`flex-1 ${i % 2 === 0 ? "md:text-right md:pr-12" : "md:text-left md:pl-12"}`}>
                   <div className="bg-white rounded-2xl p-6 shadow-sm border border-gold-light/20 hover:shadow-md hover:border-gold-light/40 transition-all duration-300">
                     {event.photo ? (
-                      <img src={event.photo} alt={event.title} className="w-full h-32 object-cover object-top rounded-xl mb-3" />
+                      <img src={event.photo} alt={event.title} className="w-full h-40 object-cover object-center rounded-xl mb-3" />
                     ) : (
                       <span className="text-3xl mb-2 block">{event.icon}</span>
                     )}
