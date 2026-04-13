@@ -75,7 +75,7 @@ export const timelineEvents: TimelineEvent[] = [
   {
     year: "2006 onwards",
     title: "Grandparents!",
-    titleHi: "नाना-नानी बने!",
+    titleHi: "नाना-नानी बने! दादा-दादी भी",
     description: "The best role yet. Spoiling grandchildren became a full-time job.",
     icon: "👨‍👩‍👧‍👦",
     photo: "/photos/tis-tvi-aala.jpeg",
