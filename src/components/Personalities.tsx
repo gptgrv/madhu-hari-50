@@ -40,7 +40,7 @@ export default function Personalities() {
           {/* Mummy */}
           <div className="relative bg-gradient-to-br from-[#fdf2f0] to-[#f8e8e4] rounded-2xl md:rounded-l-none p-8 md:p-12 border border-maroon-light/10 md:border-l-0">
             <div className="w-32 h-32 rounded-full overflow-hidden border-4 border-maroon-light/30 mb-6 mx-auto md:mx-0">
-              <img src="/photos/Madhu.jpg" alt="Madhu Gupta" className="w-full h-full object-cover object-top" />
+              <img src="/photos/madhu_taj.jpeg" alt="Madhu Gupta" className="w-full h-full object-cover object-top" />
             </div>
             <h3 className="font-[family-name:var(--font-serif)] text-3xl font-bold text-text-dark mb-1">
               Madhu Gupta
