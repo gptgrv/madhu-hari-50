@@ -8,7 +8,6 @@ import Gallery from "@/components/Gallery";
 import MusicPlayer from "@/components/MusicPlayer";
 import Footer from "@/components/Footer";
 import SectionDivider from "@/components/SectionDivider";
-
 export default function Home() {
   return (
     <main>

@@ -1,24 +1,27 @@
 "use client";
-import { useState, useEffect } from "react";
+import { useEffect, useState } from "react";
 
 const navItems = [
-  { label: "Home", href: "#hero" },
   { label: "Our Story", href: "#timeline" },
   { label: "Travels", href: "#travels" },
   { label: "Two Halves", href: "#personalities" },
-  { label: "Wall of Love", href: "#wall-of-love" },
   { label: "Gallery", href: "#gallery" },
 ];
 
 export default function Navigation() {
   const [scrolled, setScrolled] = useState(false);
-  const [menuOpen, setMenuOpen] = useState(false);
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 50);
     window.addEventListener("scroll", onScroll);
     return () => window.removeEventListener("scroll", onScroll);
   }, []);
+
+  function handleSendWishes() {
+    const section = document.getElementById("wall-of-love");
+    section?.scrollIntoView({ behavior: "smooth", block: "start" });
+    window.dispatchEvent(new CustomEvent("open-wish-form"));
+  }
 
   return (
     <nav
@@ -36,8 +39,8 @@ export default function Navigation() {
           H & M
         </a>
 
-        {/* Desktop */}
-        <div className="hidden md:flex gap-6">
+        {/* Desktop nav links */}
+        <div className="hidden md:flex gap-6 items-center">
           {navItems.map((item) => (
             <a
               key={item.href}
@@ -49,31 +52,14 @@ export default function Navigation() {
           ))}
         </div>
 
-        {/* Mobile toggle */}
+        {/* Send Wishes — always visible top right */}
         <button
-          className="md:hidden text-gold-dark text-2xl"
-          onClick={() => setMenuOpen(!menuOpen)}
-          aria-label="Toggle menu"
+          onClick={handleSendWishes}
+          className="bg-gradient-to-r from-gold-dark to-gold text-white px-4 py-2 rounded-full text-sm font-semibold shadow hover:shadow-md hover:scale-105 active:scale-95 transition-all duration-300"
         >
-          {menuOpen ? "✕" : "☰"}
+          💌 Send Wishes
         </button>
       </div>
-
-      {/* Mobile menu */}
-      {menuOpen && (
-        <div className="md:hidden bg-cream/98 backdrop-blur-sm border-t border-gold-light/30 px-4 py-4 space-y-3">
-          {navItems.map((item) => (
-            <a
-              key={item.href}
-              href={item.href}
-              onClick={() => setMenuOpen(false)}
-              className="block text-text-muted hover:text-gold-dark transition-colors font-medium"
-            >
-              {item.label}
-            </a>
-          ))}
-        </div>
-      )}
     </nav>
   );
 }
