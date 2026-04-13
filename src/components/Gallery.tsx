@@ -23,6 +23,8 @@ const galleryPhotos: Photo[] = [
   { src: "/photos/Madhu.jpeg", caption: "Mummy — always the life of the room ✨" },
   { src: "/photos/508165781_9949154331835364_4767380902066963298_n.jpg", caption: "Nalanda ruins, Bihar" },
   { src: "/photos/516853872_10228586923730018_3118254695958738490_n.jpg", caption: "Friends forever" },
+  { src: "/photos/mom_dad_usa1.jpeg", caption: "USA memories 🇺🇸" },
+  { src: "/photos/mom_dad_usa2.jpeg", caption: "USA memories 🇺🇸" },
 ];
 
 export default function Gallery() {
