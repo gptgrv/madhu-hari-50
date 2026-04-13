@@ -30,6 +30,7 @@ export const timelineEvents: TimelineEvent[] = [
     titleHi: "शुरुआत",
     description: "Dr Hari Gupta and Madhu tied the knot. A bond that would last a lifetime and beyond.",
     icon: "💍",
+    photo: "/photos/beginning.jpeg",
   },
   {
     year: "1976–80",
