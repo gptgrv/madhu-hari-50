@@ -68,6 +68,7 @@ export const timelineEvents: TimelineEvent[] = [
     titleHi: "धरमपुर",
     description: "A brief but memorable stint in Dharampur. The kids were growing up fast.",
     icon: "🏡",
+    photo: "/photos/All4.jpeg",
   },
   {
     year: "1989",
