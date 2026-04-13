@@ -9,8 +9,6 @@ const heroPhotos = [
   { src: "/photos/hero-5.jpg", alt: "Paris, Eiffel Tower", pos: "center" },
   { src: "/photos/hero-6.jpg", alt: "Universal Studios, Singapore", pos: "30% center" },
   { src: "/photos/hero-7.jpg", alt: "Golden anniversary memory", pos: "center" },
-  { src: "/photos/hero-7X.jpg", alt: "Golden anniversary memory", pos: "center" },
-  { src: "/photos/hero-8.jpg", alt: "Another treasured moment together", pos: "center" },
 ];
 
 export default function Hero() {
