@@ -11,8 +11,6 @@ const heroPhotos = [
   { src: "/photos/hero-7.jpg", alt: "Golden anniversary memory", pos: "center" },
   { src: "/photos/hero-7X.jpg", alt: "Golden anniversary memory", pos: "center" },
   { src: "/photos/hero-8.jpg", alt: "Another treasured moment together", pos: "center" },
-  { src: "/photos/hero-1XX.jpg", alt: "Hari & Madhu together", pos: "center" },
-  { src: "/photos/hero-3XX.jpg", alt: "Hari & Madhu together", pos: "center" },
 ];
 
 export default function Hero() {
