@@ -52,6 +52,7 @@ export const timelineEvents: TimelineEvent[] = [
     titleHi: "गौरव का जन्म",
     description: "The family grew with the arrival of Gaurav. The team was now complete!",
     icon: "👶",
+    photo: "/photos/gaurav_born.jpeg",
   },
   {
     year: "~1983",
