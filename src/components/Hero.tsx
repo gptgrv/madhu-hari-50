@@ -8,7 +8,7 @@ const heroPhotos = [
   { src: "/photos/hero-2.jpg", alt: "Seoul Palace at night", pos: "center" },
   { src: "/photos/hero-3.jpg", alt: "Young Hari & Madhu — the early years", pos: "center" },
   { src: "/photos/hero-4.JPG", alt: "Ladakh", pos: "center" },
-  { src: "/photos/hero-5.jpg", alt: "Paris, Eiffel Tower", pos: "center" },
+  { src: "/photos/Busan-both.jpeg", alt: "Busan, South Korea", pos: "center" },
   { src: "/photos/hero-6.jpg", alt: "Universal Studios, Singapore", pos: "30% center" },
   { src: "/photos/hero-7.jpg", alt: "Golden anniversary memory", pos: "center" },
 ];
