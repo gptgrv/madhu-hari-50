@@ -30,7 +30,7 @@ const galleryPhotos: Photo[] = [
   { src: "/photos/Taipei-2025-windy.jpg", caption: "Stormy coast, Taipei 2025" },
   { src: "/photos/WhatsApp Image 2026-04-12 at 14.23.13 (2).jpeg", caption: "Mount Faber Peak, Singapore" },
   { src: "/photos/WhatsApp Image 2026-04-12 at 14.23.15.jpeg", caption: "Family night out — Ferris wheel!" },
-  { src: "/photos/Madhu.jpeg", caption: "Mummy — always the life of the room ✨" },
+
   { src: "/photos/508165781_9949154331835364_4767380902066963298_n.jpg", caption: "Nalanda ruins, Bihar" },
   { src: "/photos/516853872_10228586923730018_3118254695958738490_n.jpg", caption: "Friends forever" },
   { src: "/photos/mom_dad_usa1.jpeg", caption: "USA memories 🇺🇸" },
