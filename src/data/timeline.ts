@@ -83,7 +83,7 @@ export const timelineEvents: TimelineEvent[] = [
     titleHi: "नाना-नानी बने! दादा-दादी भी",
     description: "The best role yet. Spoiling grandchildren became a full-time job.",
     icon: "👨‍👩‍👧‍👦",
-    photo: "/photos/tis-tvi-aala.jpeg",
+    photo: "/photos/aala-tia-tvi.jpeg",
   },
   {
     year: "2006",
