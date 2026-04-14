@@ -39,7 +39,7 @@ export default function TravelMap() {
           </div>
           <div className="w-[1px] bg-gold-light/40" />
           <div className="text-center">
-            <p className="font-[family-name:var(--font-serif)] text-5xl font-bold text-gold-dark">5</p>
+            <p className="font-[family-name:var(--font-serif)] text-5xl font-bold text-gold-dark">4</p>
             <p className="text-text-muted text-base">Continents</p>
           </div>
           <div className="w-[1px] bg-gold-light/40" />
