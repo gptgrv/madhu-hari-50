@@ -1,6 +1,54 @@
 "use client";
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useMemo } from "react";
 import { timelineEvents } from "@/data/timeline";
+
+function Confetti() {
+  const pieces = useMemo(() => {
+    const colors = ["#D4A843", "#B8860B", "#FFD700", "#C41E3A", "#E8B4B8", "#FF6B6B", "#4CAF50", "#FF9800"];
+    return Array.from({ length: 30 }, (_, i) => ({
+      id: i,
+      left: `${Math.random() * 100}%`,
+      delay: `${Math.random() * 3}s`,
+      duration: `${2 + Math.random() * 3}s`,
+      color: colors[i % colors.length],
+      size: 4 + Math.random() * 6,
+      rotation: Math.random() * 360,
+    }));
+  }, []);
+
+  return (
+    <div className="absolute inset-0 pointer-events-none overflow-hidden">
+      {pieces.map((p) => (
+        <span
+          key={p.id}
+          className="absolute animate-confetti-fall"
+          style={{
+            left: p.left,
+            top: "-10px",
+            animationDelay: p.delay,
+            animationDuration: p.duration,
+            width: p.size,
+            height: p.size * 0.6,
+            backgroundColor: p.color,
+            borderRadius: "1px",
+            transform: `rotate(${p.rotation}deg)`,
+          }}
+        />
+      ))}
+      <style>{`
+        @keyframes confetti-fall {
+          0% { transform: translateY(-10px) rotate(0deg); opacity: 1; }
+          100% { transform: translateY(400px) rotate(720deg); opacity: 0; }
+        }
+        .animate-confetti-fall {
+          animation-name: confetti-fall;
+          animation-iteration-count: infinite;
+          animation-timing-function: ease-in;
+        }
+      `}</style>
+    </div>
+  );
+}
 
 export default function Timeline() {
   const sectionRef = useRef<HTMLDivElement>(null);
@@ -47,7 +95,8 @@ export default function Timeline() {
               >
                 {/* Content card */}
                 <div className={`flex-1 ${i % 2 === 0 ? "md:text-right md:pr-12" : "md:text-left md:pl-12"}`}>
-                  <div className="bg-white rounded-2xl p-6 shadow-sm border border-gold-light/20 hover:shadow-md hover:border-gold-light/40 transition-all duration-300">
+                  <div className={`bg-white rounded-2xl p-6 shadow-sm border border-gold-light/20 hover:shadow-md hover:border-gold-light/40 transition-all duration-300 relative overflow-hidden ${event.confetti ? "ring-2 ring-gold" : ""}`}>
+                    {event.confetti && <Confetti />}
                     {event.photo ? (
                       <img src={event.photo} alt={event.title} className="w-full h-40 object-cover object-center rounded-xl mb-3" />
                     ) : (

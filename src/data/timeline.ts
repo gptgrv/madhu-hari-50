@@ -5,6 +5,7 @@ export interface TimelineEvent {
   description: string;
   icon: string;
   photo?: string;
+  confetti?: boolean;
 }
 
 export const timelineEvents: TimelineEvent[] = [
@@ -98,6 +99,7 @@ export const timelineEvents: TimelineEvent[] = [
     titleHi: "सफ़र शुरू",
     description: "With the kids grown up, the adventures began — Europe, Asia, and beyond. A new country every year!",
     icon: "✈️",
+    photo: "/photos/travel-bug.jpeg",
   },
   {
     year: "2026",
@@ -105,5 +107,6 @@ export const timelineEvents: TimelineEvent[] = [
     titleHi: "सुनहरे 50 साल",
     description: "Half a century of love, laughter, chai, and endless journeys together. Here's to many more! 🥂",
     icon: "💛",
+    confetti: true,
   },
 ];
