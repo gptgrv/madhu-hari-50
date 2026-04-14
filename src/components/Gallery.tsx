@@ -13,6 +13,8 @@ const galleryPhotos: Photo[] = [
   { src: "/photos/train.jpeg", caption: "Journey together 🚂" },
   { src: "/photos/love_both.jpeg", caption: "Love, always 💛" },
   { src: "/photos/madhu_standing.jpeg", caption: "Madhu — grace personified ✨" },
+  { src: "/photos/new_1.jpeg", caption: "Another beautiful memory 💛" },
+  { src: "/photos/new_2.jpeg", caption: "Cherished moments ✨" },
   { src: "/photos/505919763_9936683243082473_7783100801688979198_n.jpg", caption: "Young family — where it all began 🖤" },
   { src: "/photos/517285402_10228630084569012_5073919397648566496_n.jpg", caption: "Backwater cruise — hats on!" },
   { src: "/photos/517395314_10228586922769994_5501380678310409519_n.jpg", caption: "Karibu Zanzibar! 🌊" },
