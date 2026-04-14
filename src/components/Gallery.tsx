@@ -18,6 +18,7 @@ const galleryPhotos: Photo[] = [
   { src: "/photos/madhu_bride.jpeg", caption: "The beautiful bride 💍" },
   { src: "/photos/marriage.jpeg", caption: "The beginning of forever 💛" },
   { src: "/photos/new-3.jpeg", caption: "Golden memories ✨" },
+  { src: "/photos/new-4.jpeg", caption: "Timeless moments 💛" },
   { src: "/photos/505919763_9936683243082473_7783100801688979198_n.jpg", caption: "Young family — where it all began 🖤" },
   { src: "/photos/517285402_10228630084569012_5073919397648566496_n.jpg", caption: "Backwater cruise — hats on!" },
   { src: "/photos/517395314_10228586922769994_5501380678310409519_n.jpg", caption: "Karibu Zanzibar! 🌊" },
